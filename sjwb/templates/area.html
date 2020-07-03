@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}
+	<title>{{ area_title }} | SIRLA 許願瓶</title>
+{% endblock %}
+
+{% block content %}
+	{% if request.user.is_authenticated %}
+		<p>Welcome, {{ user.username }}</p>
+	{% endif %}
+	<h2>{{ area_title }}</h2>
+        <div class="container">
+        	<div class="row">
+        	{% for post in post_list %}
+        		<div class="jumbotron col-md-4">
+        			<a href="{% url 'post_detail' pk=post.pk %}" style="text-decoration:none; color: inherit;">
+        			<div class="post mb-4 box-shadow" style="width: 110%;">
+        				{% if post.photo.url is not null %}
+        				<img class="post-img-top" style="height: 225px; width: 100%; " src="{{ post.photo.url }}">
+        				{% else %}
+        				<img class="post-img-top" style="height: 225px; width: 100%;" src="/media/img/no_image.jpg">
+        				{% endif %}
+        				<div class="post-body">
+        					<p class="tile">{{ post.title }}</p>
+        					<p>{{ post.text|linebreaksbr|slice:":30" }}</p>
+        					<p>{{ post.location }}</p>
+        					<div class="d-flex justify-content-between align-items-center">
+        						<div class="btn-group">
+                                                        {% if request.user.is_authenticated %}
+                                                                <button type="button" class="btn btn-default btn-sm btn-outline-secondary">Comment</button>
+                                                                <button type="button" class="btn btn-default btn-sm btn-outline-secondary">
+                                                                        <a href="{% url 'post_edit' pk=post.pk%}" style="text-decoration:none; color: inherit;">Edit</a>
+                                                                </button>
+                                                                <button type="button" class="btn btn-default btn-sm btn-outline-secondary">
+                                                                        <a href="{% url 'post_delete' pk=post.pk %}" style="text-decoration:none; color: inherit;">Delete</a>
+                                                                </button>
+                                                        {% endif %}
+        						</div>
+                                                        <div><small class="text-muted">{{ post.created_date }}</small></div>
+        						
+        					</div>
+        				</div>
+        			</div></a>
+        		</div>
+			{% empty %}
+			{% if request.user.is_authenticated %}
+				<p>目前還沒有人新增推薦文喔</p>
+				<button type="button" class="btn btn-default btn-sm btn-outline-secondary">
+				<a href="{% url 'post_new' %}" style="text-decoration:none; color: inherit;"><h2> 我要推薦</h2></a>
+				</button>
+				{% else %}
+				<p>目前還沒有人新增推薦文喔</p>
+			{% endif %}
+			{% endfor %}
+
+{% endblock %}

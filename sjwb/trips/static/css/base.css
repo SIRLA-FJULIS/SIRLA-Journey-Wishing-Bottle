@@ -1,0 +1,39 @@
+.container {
+	display: flex;
+	justify-content: space-around;
+}
+
+.navbar {
+	list-style-type: none;
+	margin-top: 20;
+	padding: 0;
+	background-color: black;
+}
+.navbar a {
+	color: white;
+}
+
+.sidebar {
+	width:20%;
+}
+
+.tile {
+	font-size: 150%;
+}
+
+:root {
+  --jumbotron-padding-y: 1rem;
+}
+
+.jumbotron {
+  padding-top: var(--jumbotron-padding-y);
+  padding-bottom: var(--jumbotron-padding-y);
+  margin-bottom: 2;
+  background-color: #fff;
+
+
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
+.raphael-group-48-fc-gradient-legend {
+    display: none;
+}
