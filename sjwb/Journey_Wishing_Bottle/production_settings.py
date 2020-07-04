@@ -5,7 +5,7 @@ DATABASES = {
 	'default': dj_database_url.config(),
 }
 
-STATIC_ROOT = '/app/Journey_Wishing_Bottle/trips/static'
+STATIC_ROOT = '/mysite/trips/static'
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
