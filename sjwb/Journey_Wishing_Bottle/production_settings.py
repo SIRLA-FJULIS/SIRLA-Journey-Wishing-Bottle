@@ -5,7 +5,7 @@ DATABASES = {
 	'default': dj_database_url.config(),
 }
 
-STATIC_ROOT = '/app/sjwb/trips/static'
+STATIC_ROOT = '/sjwb/trips/static'
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
