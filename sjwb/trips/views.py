@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 #建立首頁
-from trips.models import Post, Like
+from trips.models import Post
 from .forms import PostForm
 from django.utils import timezone
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy, reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 
 def home(request):
@@ -145,26 +145,16 @@ def register(request):
 def like_post(request):
 	user = request.user
 	if request.method == 'POST':
-		post_id = request.POST.get('post_id')
-		post = Post.objects.get(id=post_id)
+		pk = request.POST.get('post_pk')
+		post = Post.objects.get(pk=pk)
 
 		if user in post.liked.all():
 			post.liked.remove(user)
 		else:
 			post.liked.add(user)
 
-		like, created = Like.objects.get_or_create(user=user,post_id=post_id)
+	return HttpResponse()
 
-		if not created:
-			if like.value == 'Like':
-				like.value == 'Unlike'
-			else:
-				like.value == 'Like'
-
-		like.save()
-	if post.category == 1:
-		return redirect('attraction')
-	elif post.category == 2:
-		return redirect('accomodation')
-	else:
-		return redirect('restaurant')
+def post_serialized_view(request):
+	data = list(Post.objects.values())
+	return JsonResponse(data, safe=False)
