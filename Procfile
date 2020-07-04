@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath Journey_Wishing_Bottle Journey_Wishing_Bottle.wsgi
+web: gunicorn --pythonpath sjwb Journey_Wishing_Bottle.wsgi
