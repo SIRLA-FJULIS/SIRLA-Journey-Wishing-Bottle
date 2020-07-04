@@ -4,11 +4,12 @@
 }
 
 .navbar {
-	list-style-type: none;
-	margin-top: 20;
-	padding: 0;
+	/*list-style-type: none;*/
+	/*padding: 5;*/
+	text-align: center;
 	background-color: black;
 }
+
 .navbar a {
 	color: white;
 }

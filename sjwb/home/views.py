@@ -22,8 +22,8 @@ def TaiwanChart(request):
 
   # The `chartConfig` dict contains key-value pairs of data for chart attribute
   chartConfig = OrderedDict()
-  chartConfig["caption"] = "SIRLA 旅遊地圖"
-  chartConfig["subcaption"] = "SIRLA 2020-07"
+  #chartConfig["caption"] = "SIRLA 旅遊許願瓶"
+  #chartConfig["subcaption"] = "SIRLA 2020-07"
   chartConfig["showLabels"] = "0"
   chartConfig["borderThickness"] = "0.5"
   chartConfig["theme"] = "fusion" # fusion, gammel, candy, umber
