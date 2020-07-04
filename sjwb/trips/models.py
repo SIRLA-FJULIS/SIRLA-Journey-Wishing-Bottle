@@ -3,6 +3,12 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 
+class Tag(models.Model):
+	name = models.CharField(max_length=10)
+	# 讓它改成顯示名稱
+	def __str__(self):
+		return self.name
+
 class Post(models.Model):
 	author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='author')
 	title = models.CharField(max_length=200, help_text='<font color="red">*必填</font>')
@@ -30,14 +36,14 @@ class Post(models.Model):
 		(20, '澎湖縣'),	
 		(21, '金門縣'),
 		(22, '連江縣'),)
-	area = models.IntegerField(max_length=100, choices=AREA_CHOICES, default=1)
+	area = models.IntegerField(choices=AREA_CHOICES, default=1)
 
 	CHOICES=((1,'景點'),(2,'住宿'),(3,'餐廳'))
-	category = models.IntegerField(max_length=2, choices=CHOICES, default=1)
+	category = models.IntegerField(choices=CHOICES, default=1)
 	
 	location = models.CharField(max_length=100, help_text='<font color="red">*必填</font>')
 	phone_number = models.CharField(max_length=12,blank=True, null=True, help_text='類型是住宿或餐廳才要填')
-	tag = models.CharField(max_length=10,blank=True, null=True)
+	tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
 	photo = models.ImageField(upload_to='img/',blank=True, null=True)
 	created_date = models.DateTimeField(default=timezone.now)
 	published_date = models.DateTimeField(blank=True, null=True) 

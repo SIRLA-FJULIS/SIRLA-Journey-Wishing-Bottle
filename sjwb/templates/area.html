@@ -10,16 +10,17 @@
 	<h2>{{ area_title }}</h2>
         <div class="container">
         	<div class="row">
-        	{% for post in post_list %}
+			{% for post in post_list %}
         		<div class="jumbotron col-md-4">
-        			<a href="{% url 'post_detail' pk=post.pk %}" style="text-decoration:none; color: inherit;">
+					<a href="{% url 'post_detail' pk=post.pk %}" style="text-decoration:none; color: inherit;">
         			<div class="post mb-4 box-shadow" style="width: 110%;">
         				{% if post.photo.url is not null %}
         				<img class="post-img-top" style="height: 225px; width: 100%; " src="{{ post.photo.url }}">
         				{% else %}
         				<img class="post-img-top" style="height: 225px; width: 100%;" src="/media/img/no_image.jpg">
-        				{% endif %}
+						{% endif %}
         				<div class="post-body">
+							<span><a href="#" class="badge badge-secondary">{{ post.tag.name }}</a></span>
         					<p class="tile">{{ post.title }}</p>
         					<p>{{ post.text|linebreaksbr|slice:":30" }}</p>
         					<p>{{ post.location }}</p>

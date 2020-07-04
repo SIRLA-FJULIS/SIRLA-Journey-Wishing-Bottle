@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 #建立首頁
-from trips.models import Post, Like
+from trips.models import Post, Like, Tag
 from .forms import PostForm
 from django.utils import timezone
 from django.contrib.auth.forms import UserCreationForm
