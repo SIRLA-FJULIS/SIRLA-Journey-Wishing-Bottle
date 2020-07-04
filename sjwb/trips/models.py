@@ -60,6 +60,7 @@ class Post(models.Model):
 
 	def __str__(self):
 		return self.title
+
 '''
 author 			作者
 title			標題
@@ -73,6 +74,7 @@ photo			照片(格式是圖片網址)
 created_date
 published_date
 '''
+
 LIKE_CHOICES=(
 	('Like','Like'),
 	('Unlike','Unlike'),
