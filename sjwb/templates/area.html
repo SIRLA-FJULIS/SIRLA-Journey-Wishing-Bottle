@@ -9,6 +9,7 @@
 	{% endif %}
 	<h2>{{ area_title }}</h2>
         <div class="container">
+<<<<<<< HEAD
                 <div class="row">
                 {% for post in post_list %}
                         <div class="jumbotron col-md-4">
@@ -20,12 +21,32 @@
                                         <img class="post-img-top" style="height: 225px; width: 100%;" src="/media/img/no_image.jpg">
                                         {% endif %}
                                         <div class="post-body">
-                                                <p class="tile" href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</p>
+                                                <span><a href="#" class="badge badge-secondary">{{ post.tag.name }}</a></span>
+                                                <p class="title" href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</p>
                                                 <p>{{ post.text|linebreaksbr|slice:":30" }}</p>
                                                 <p>{{ post.location }}</p>
                             <small class="text-muted likes-total{{ post.id }}">{{ post.liked.all.count }} likes</small>
                                                 <div class="d-flex justify-content-between align-items-center">
                                                         <div class="btn-group">
+=======
+        	<div class="row">
+			{% for post in post_list %}
+        		<div class="jumbotron col-md-4">
+					<a href="{% url 'post_detail' pk=post.pk %}" style="text-decoration:none; color: inherit;">
+        			<div class="post mb-4 box-shadow" style="width: 110%;">
+        				{% if post.photo.url is not null %}
+        				<img class="post-img-top" style="height: 225px; width: 100%; " src="{{ post.photo.url }}">
+        				{% else %}
+        				<img class="post-img-top" style="height: 225px; width: 100%;" src="/media/img/no_image.jpg">
+						{% endif %}
+        				<div class="post-body">
+							<span><a href="#" class="badge badge-secondary">{{ post.tag.name }}</a></span>
+        					<p class="tile">{{ post.title }}</p>
+        					<p>{{ post.text|linebreaksbr|slice:":30" }}</p>
+        					<p>{{ post.location }}</p>
+        					<div class="d-flex justify-content-between align-items-center">
+        						<div class="btn-group">
+>>>>>>> 3df41b166483a4668124ca5e390bf8b60b719f49
                                                         {% if request.user.is_authenticated %}
                                                                 {% if request.user.id != post.author.id %}
                                                                 

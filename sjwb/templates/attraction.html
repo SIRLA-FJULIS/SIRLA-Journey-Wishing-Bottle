@@ -21,6 +21,7 @@
         				<img class="post-img-top" style="height: 225px; width: 100%;" src="/media/img/no_image.jpg">
         				{% endif %}
         				<div class="post-body">
+                                                <span><a href="#" class="badge badge-secondary">{{ post.tag.name }}</a></span>
         					<p class="tile" href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</p>
         					<p>{{ post.text|linebreaksbr|slice:":30" }}</p>
         					<p>{{ post.location }}</p>
