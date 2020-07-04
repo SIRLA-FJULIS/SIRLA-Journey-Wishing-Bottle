@@ -1,11 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 #建立首頁
-<<<<<<< HEAD
-from trips.models import Post
-=======
-from trips.models import Post, Like, Tag
->>>>>>> 3df41b166483a4668124ca5e390bf8b60b719f49
-from .forms import PostForm
+from trips.models import Post, Like, Tag, Comment
+from .forms import PostForm, post_comment_form
 from django.utils import timezone
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy, reverse
@@ -56,16 +52,32 @@ def area(request):
 	return render(request, 'area.html', {'post_list': post_list,'area_title':area_title})
 
 def attraction(request):
-	post_list = Post.objects.filter(category=1).order_by('-created_date')
+	post = Post.objects.filter(category=1).order_by('-created_date')
 	user = request.user
+	art_comment = []
+	for po in post:
+		if po.comment_set.all():
+			art_comment.append(po.comment_set.all())
+		else:
+			art_comment.append([])
+	post_list = zip(post, art_comment)
+	comment_form = post_comment_form()
 	return render(request, 'attraction.html', {
 		'post_list': post_list,
 		'user':user,
 		})
 
 def accomodation(request):
-	post_list = Post.objects.filter(category=2).order_by('-created_date')
+	post = Post.objects.filter(category=2).order_by('-created_date')
 	user = request.user
+	art_comment = []
+	for po in post:
+		if po.comment_set.all():
+			art_comment.append(po.comment_set.all())
+		else:
+			art_comment.append([])
+	post_list = zip(post, art_comment)
+	comment_form = post_comment_form()
 	return render(request, 'accomodation.html', {
 		'post_list': post_list,
 		'user':user,
@@ -73,8 +85,16 @@ def accomodation(request):
 
 
 def restaurant(request):
-	post_list = Post.objects.filter(category=3).order_by('-created_date')
+	post = Post.objects.filter(category=3).order_by('-created_date')
 	user = request.user
+	art_comment = []
+	for po in post:
+		if po.comment_set.all():
+			art_comment.append(po.comment_set.all())
+		else:
+			art_comment.append([])
+	post_list = zip(post, art_comment)
+	comment_form = post_comment_form()
 	return render(request, 'restaurant.html', {
 		'post_list': post_list,
 		'user':user,
@@ -162,3 +182,16 @@ def like_post(request):
 def post_serialized_view(request):
 	data = list(Post.objects.values())
 	return JsonResponse(data, safe=False)
+
+def post_new_comment(request, post_id): 
+	the_post = Post.objects.get(pk=post_id)
+	if request.method =="POST":
+		comment_form = post_comment_form(request.POST or None)
+		if comment_form.is_valid():
+			new_comment = comment_form.save(commit=False)
+			new_comment.comment_post = the_post
+			new_comment.save()
+			messages.success(request, "成功新增留言")
+			return redirect('/attraction')
+		else:
+			return redirect('/attraction')

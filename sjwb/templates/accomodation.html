@@ -9,10 +9,16 @@
 		<p>Welcome, {{ user.username }}</p>
 	{% endif %}
 	<h2>住宿 accomodation</h2>
+    {% if messages %}
+    <ul class="massages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
         <div class="container">
-<<<<<<< HEAD
             <div class="row">
-            {% for post in post_list %}
+            {% for post,comment in post_list %}
                 <div class="jumbotron col-md-4">
                     <a href="{% url 'post_detail' pk=post.pk %}" style="text-decoration:none; color: inherit;">
                     <div class="post mb-4 box-shadow" style="width: 110%;">
@@ -27,10 +33,24 @@
                             <p>{{ post.text|linebreaksbr|slice:":30" }}</p>
                             <p>{{ post.location }}</p>
                             <p>{{ post.phone_number }}</p>
+                            {% for co in comment %}
+                        <div>
+                            {{ co.comment_man }}說：{{ co.comment_content }}
+                        </div>
+                        {% endfor %}
+                        <form action="{% url 'post_new_comment' post.id %}" method = "POST">
+                            {% csrf_token %}
+                            {% if request.user.is_authenticated %}
+                            <input type="hidden" value="{{ request.user.first_name }}" name="comment_man">
+                            {% else %}
+                            <input type="hidden" value="訪客" name="comment_man">
+                            {% endif %}
+                            <input type="search" placeholder="歡迎留言" name="comment_content">
+                            <button type="submit", class="btn btn-default btn-sm btn-outline-secondary">送出</button>
+                        </form>
                             <small class="text-muted likes-total{{ post.id }}">{{ post.liked.all.count }} likes</small>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-=======
         	<div class="row">
                 {% for post in post_list %}
         		<div class="jumbotron col-md-4">
@@ -50,7 +70,6 @@
                             <p>{{ post.liked.all.count }} likes</p>
         					<div class="d-flex justify-content-between align-items-center">
         						<div class="btn-group">
->>>>>>> 3df41b166483a4668124ca5e390bf8b60b719f49
                                                         {% if request.user.is_authenticated %}
                                                                 {% if request.user.id != post.author.id %}
                                                                 
@@ -67,7 +86,6 @@
                                                                         {% endif %}
                                                                         </form>
                                                                         
-                                                                <button type="submit" class="btn btn-default btn-sm btn-outline-secondary">Comment</button>
                                                                 {% else %}
                                                                 <form action="{% url 'like_post' %}" id="{{ post.id }}" method="POST" class="like-form">
                                                                     {% csrf_token %}
@@ -81,7 +99,6 @@
                                                                                         </button>
                                                                         {% endif %}
                                                                         </form>
-                                    <button type="button" class="btn btn-default btn-sm btn-outline-secondary">Comment</button>
                                                                 <button type="button" class="btn btn-default btn-sm btn-outline-secondary">
                                                                         <a href="{% url 'post_edit' pk=post.pk%}" style="text-decoration:none; color: inherit;">Edit</a>
                                                                 </button>
@@ -107,4 +124,5 @@
                 <p>目前還沒有人新增推薦文喔</p>
             {% endif %}
             {% endfor %}
+{% endfor %}
 {% endblock %}

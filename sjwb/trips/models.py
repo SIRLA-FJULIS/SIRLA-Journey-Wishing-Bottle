@@ -70,7 +70,7 @@ category		類別
 location 		地點
 phone_number 	電話
 tag				標籤
-photo			照片(格式是圖片網址)
+photo			照片
 created_date
 published_date
 '''
@@ -88,3 +88,14 @@ class Like(models.Model):
 
 	def __str__(self):
 		return self.post
+
+class Comment(models.Model):
+	comment_post = models.ForeignKey('post', on_delete=models.CASCADE)
+	comment_content = models.CharField(max_length = 150, null=False)
+	comment_man = models.CharField(max_length = 25, default="訪客")
+	comment_date = models.DateTimeField(null=False, default = timezone.now())
+	def __str__(self):
+		return str(self.comment_post)
+	class Meta:
+		db_table = 'post_comment'
+		ordering = ('-comment_date',)
