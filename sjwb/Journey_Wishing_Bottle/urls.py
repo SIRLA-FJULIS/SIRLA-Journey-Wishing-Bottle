@@ -19,7 +19,7 @@ from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views
-from trips.views import attraction, accomodation, restaurant, post_detail, post_new, post_delete, post_edit, register, area, like_post, post_serialized_view
+from trips.views import attraction, accomodation, restaurant, post_detail, post_new, post_delete, post_edit, register, area, like_post, post_serialized_view, post_new_comment
 
 
 urlpatterns = [
@@ -33,6 +33,7 @@ urlpatterns = [
     path('restaurant/', restaurant, name='restaurant'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('register/', register, name='register'),
+    re_path(r'^post/post_new_comment/(?P<post_id>[0-9]+)/$', post_new_comment, name='post_new_comment'),
     re_path(r'^post/(?P<pk>\d+)/$', post_detail, name="post_detail"),
     re_path(r'^post/new/$', post_new, name='post_new'),
     re_path(r'^post/(?P<pk>[0-9]+)/delete/$', post_delete, name='post_delete'),
