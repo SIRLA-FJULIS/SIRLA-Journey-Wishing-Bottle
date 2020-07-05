@@ -4,7 +4,6 @@ from trips.models import Post, Like, Tag, Comment
 from .forms import PostForm, post_comment_form
 from django.utils import timezone
 from django.contrib.auth.forms import UserCreationForm
-from django.urls import reverse_lazy, reverse
 from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 
