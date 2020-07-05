@@ -36,7 +36,6 @@
                                         <p class="tile" href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</p>
                                         <span>{{ post.text|linebreaksbr|slice:":30" }}</p>
                                         <span>{{ post.location }}</p>
-                                        <span>{{ post.phone_number }}</p>
                                         <small class="text-muted likes-total{{ post.id }}">{{ post.liked.all.count }} likes</small>
                                         <div class="d-flex justify-content-between align-items-center">
                                                 <div class="btn-group">
