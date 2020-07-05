@@ -93,7 +93,7 @@ class Comment(models.Model):
 	comment_post = models.ForeignKey('post', on_delete=models.CASCADE)
 	comment_content = models.CharField(max_length = 150, null=False)
 	comment_man = models.CharField(max_length = 25, default="訪客")
-	comment_date = models.DateTimeField(null=False, default = timezone.now())
+	comment_date = models.DateTimeField(null=False, default = timezone.now)
 	def __str__(self):
 		return str(self.comment_post)
 	class Meta:
