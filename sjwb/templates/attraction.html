@@ -94,14 +94,5 @@
         				</div>
         			</div>
         		</div>
-			{% empty %}
-				{% if request.user.is_authenticated %}
-                <p>目前還沒有人新增推薦文喔</p>
-                <button type="button" class="btn btn-default btn-sm btn-outline-secondary">
-                <a href="{% url 'post_new' %}" style="text-decoration:none; color: inherit;"><h2> 我要推薦</h2></a>
-                </button>
-                {% else %}
-                <p>目前還沒有人新增推薦文喔</p>
-            {% endif %}
 			{% endfor %}
 {% endblock %}

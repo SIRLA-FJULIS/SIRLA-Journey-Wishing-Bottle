@@ -51,7 +51,7 @@ def TaiwanChart(request):
   dataSource["data"].append({"ID": "12", "Label": "Miaoli County", "value": "44.4", "link": "/area?ID=7"})
   dataSource["data"].append({"ID": "13", "Label": "Nantou County", "value": "49.9", "link": "/area?ID=8"})
   dataSource["data"].append({"ID": "14", "Label": "Penghu County", "value": "28.7", "link": "/area?ID=20"})
-  dataSource["data"].append({"ID": "16", "Label": "Pingtung County", "value": "42.7", "link": "/area?ID=16"})
+  dataSource["data"].append({"ID": "15", "Label": "Pingtung County", "value": "42.7", "link": "/area?ID=16"})
   dataSource["data"].append({"ID": "20", "Label": "New Taipei City", "value": "32.0", "link": "/area?ID=3"})
   dataSource["data"].append({"ID": "21", "Label": "Taipei City", "value": "29.6", "link": "/area?ID=2"})
   dataSource["data"].append({"ID": "22", "Label": "Taitung County", "value": "28.9", "link": "/area?ID=17"})
