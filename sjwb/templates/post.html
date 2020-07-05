@@ -6,19 +6,21 @@
 
 {% block content %}
 	<div class="post">
-		<div  style="width: 100%;">
-			{% if post.photo.url is not null %}
-			<img style="height: 70%; width: 70%;" src="{{ post.photo.url }}">
-			{% else %}
-			<img style="height: 70%; width: 70%;" src="/media/img/no_image.jpg">
-			{% endif %}
-	</div>
+		<div class="post-img">
+            {% if post.photo.url is not null %}
+                <img class="post-img-top" src="{{ post.photo.url }}">
+            {% else %}
+                <img class="post-img-top" src="/media/img/no_image.jpg">
+            {% endif %}
+        </div>
 		<span><a href="#" class="badge badge-secondary">{{ post.tag.name }}</a></span>
 		<h2><a href="#">{{ post.title }}</a></h2>
 		<p>{{ post.created_date }}</p>
 		<p>{{ post.text }}</p>
 		<p>{{ post.location }}</p>
-		<p>{{ post.phone_number }}</p>
+        {% if catgory != 1 %}
+		  <p>{{ post.phone_number }}</p>
+        {% endif %}
 		<small class="text-muted likes-total{{ post.id }}">{{ post.liked.all.count }} likes</small>
 	{% if request.user.is_authenticated %}
                                                                 {% if request.user.id != post.author.id %}
