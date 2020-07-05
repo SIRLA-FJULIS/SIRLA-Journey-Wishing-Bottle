@@ -72,3 +72,9 @@ img {
     border:1px;
     position: relative;
 }
+
+.post-detail {
+	margin-top: 2rem;
+	height: 50%;
+	width: 80%;
+}

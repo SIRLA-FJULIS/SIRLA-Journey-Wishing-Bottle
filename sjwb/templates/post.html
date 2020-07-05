@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-	<div class="post">
+	<div class="post-detail">
 		<div class="post-img">
             {% if post.photo.url is not null %}
                 <img class="post-img-top" src="{{ post.photo.url }}">
@@ -58,4 +58,10 @@
                     </button>
             {% endif %}
         {% endif %}
+        {% for co in comment %}
+            <div>
+                {{ co.comment_man }}說：{{ co.comment_content }}
+                <small class="text-muted comment_date">{{ co.comment_date }}</small>
+            </div>
+        {% endfor %}
 {% endblock %}
